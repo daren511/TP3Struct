@@ -42,18 +42,17 @@ void CBoard::PlacerCavalier(unsigned int i, unsigned int j)
 	PlacerCavalier (ligneDepart_, colonneDepart_);
 }
 
-/*	
-	Etablir les cases que l'on peut aller visiter à partir de la position reçue
-	Pour chaque case que l'on peut visiter à partir de cette position
-		visiter cette case
-		si (toutes les cases sont visitées)
-			C'est fini
-		sinon
-			PlacerCavalier(coordonnées de cette case)
-		finsi
-		dévisiter cette case
-	finpour
-*/
+	
+	//Etablir les cases que l'on peut aller visiter à partir de la position reçue
+	//Pour chaque case que l'on peut visiter à partir de cette position
+	//	visiter cette case
+	//	si (toutes les cases sont visitées)
+	//		C'est fini
+	//	sinon
+	//		PlacerCavalier(coordonnées de cette case)
+	//	finsi
+	//	dévisiter cette case
+	//finpour
 void CBoard::PlacerCavalier(int i, int j)
 {
 	// Faire le nécessaire pour visiter cette case où on arrive
@@ -163,3 +162,8 @@ void CBoard::SetTrace(bool b)
 	faireTrace_ = b;
 }
 
+CBoard::Position::Position(unsigned int i,unsigned int j) // Structure pour la position dans Verif boite -> Quadrant
+{
+	PosI = i;
+	PosJ = j;
+}

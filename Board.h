@@ -3,6 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 #include "Matrice.h"
+#include <vector>
 #include <iostream>
 using namespace std;
 
@@ -34,6 +35,7 @@ private:
 private:
 	//--- Méthode lancée par le PlacerCavalier public
 	void PlacerCavalier(int i, int j);
+	
 
 	//--- Autres méthodes utiles
 	void AfficherNoSolution(int);
@@ -41,4 +43,12 @@ private:
 	void AfficherTrajetTrace();
 	bool ToutEstVisite();
 	void Wait(int nbSec);
+
+	struct Position
+	{
+		unsigned int PosI;
+		unsigned int PosJ;
+
+		Position(unsigned int I,unsigned int J);
+	};
 };
