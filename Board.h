@@ -46,9 +46,14 @@ private:
 
 	struct Position
 	{
-		unsigned int PosI;
-		unsigned int PosJ;
+		unsigned int PosX;
+		unsigned int PosY;
+		unsigned int Priorite;
 
-		Position(unsigned int I,unsigned int J);
+		Position(unsigned int X,unsigned int Y);
+
+		unsigned int GetX() { return PosX; }
+		unsigned int GetY() { return PosY; }
 	};
+	void TrouverCase(vector<Position> & ListeDeplacement ,unsigned int i,unsigned int j);
 };

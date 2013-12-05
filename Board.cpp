@@ -43,6 +43,14 @@ void CBoard::PlacerCavalier(unsigned int i, unsigned int j)
 }
 
 	
+void CBoard::TrouverCase(vector<Position> & ListeDeplacement ,unsigned int i,unsigned int j)
+{
+
+
+}	
+	//TrouverCase sert a remplir ce vecteur des dîte cases. Il vérifie donc si la case est accessible ainsi que de savoir si on est déjà passer dessu.
+	//DEPLUS TrouverCase trie le vecteur. La case la plus avantageuse se trouve a la position 0 du vecteur et la case la moins avantageuse se trouve donc
+	//a la derniere position du vecteur.
 	//Etablir les cases que l'on peut aller visiter à partir de la position reçue
 	//Pour chaque case que l'on peut visiter à partir de cette position
 	//	visiter cette case
@@ -55,29 +63,39 @@ void CBoard::PlacerCavalier(unsigned int i, unsigned int j)
 	//finpour
 void CBoard::PlacerCavalier(int i, int j)
 {
-	// Faire le nécessaire pour visiter cette case où on arrive
-	grilleVisitee_[i][j] = true;
-	grilleTrajet_[i][j]  = noPasDuTrajet_;
-	noPasDuTrajet_++;
-
-	if (faireTrace_) AfficherTrajetTrace();
-	if (ToutEstVisite())
+	if ( continuerRecherche_)
 	{
-		// Afficher à l'écran
-		system("cls");
-		AfficherTrajet(++nbDeSolutions_);
-		system("pause"); 
-	}
-	else
-	{
-		// Etablir la liste des cases qu'on peut atteindre
-		// Tantque la liste n'est pas vide
-		//    retirer la première coordonnée a visiter
-		//    Placer le Cavalier sur cette coordonnee
-		// fin tantque
-	}
+		
+		grilleVisitee_[i][j] = true;
+		grilleTrajet_[i][j]  = noPasDuTrajet_;
+		noPasDuTrajet_++;
+		vector <Position> ListeDeplacement;
+		TrouverCase(ListeDeplacement , i , j);
+		for ( int i = 0 ; i < ListeDeplacement.size() && continuerRecherche_ ; i++)
+		{
 
-	// Faire le nécessaire pour "dévisiter" cette case que l'on quitte 
+			if (faireTrace_ ) AfficherTrajetTrace();
+		
+			if(ToutEstVisite())
+			{
+				
+				grilleTrajet_[ListeDeplacement[i].GetX()][ListeDeplacement[i].GetY()]  = noPasDuTrajet_;
+				continuerRecherche_ = false;
+				
+			}
+			else
+			{
+				PlacerCavalier(ListeDeplacement[i].GetX() , ListeDeplacement[i].GetY());
+			}
+			if ( continuerRecherche_)
+			{
+					grilleTrajet_[ListeDeplacement[i].GetX()] [ListeDeplacement[i].GetY()]  = -1;
+					grilleVisitee_[ListeDeplacement[i].GetX()] [ListeDeplacement[i].GetY()] = false;
+					noPasDuTrajet_--;
+			}
+				
+		}
+	}
 }
 
 void CBoard::AfficherNoSolution(int noSolution)
@@ -166,4 +184,5 @@ CBoard::Position::Position(unsigned int i,unsigned int j) // Structure pour la p
 {
 	PosI = i;
 	PosJ = j;
+
 }
