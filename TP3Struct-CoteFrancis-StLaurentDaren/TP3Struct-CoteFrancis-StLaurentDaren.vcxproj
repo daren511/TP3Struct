@@ -10,6 +10,18 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="Fonctions.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="PreciseTimer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="Fonctions.h" />
+    <ClInclude Include="Matrice.h" />
+    <ClInclude Include="PreciseTimer.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{7F8FA4B3-7160-43C4-BEF2-E9E027FFF439}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
@@ -75,8 +87,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
