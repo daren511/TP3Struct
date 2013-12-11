@@ -1,3 +1,12 @@
+//////////////////////////////////////////////////////////////////////
+// P O I D S . H
+// 12 Décembre 2012
+// Francis Côté & Daren Ken St- Laurent
+//
+// La classe Poids est utilisé comme outil pour chercher la meilleure
+// case possible pour le prochain déplacement
+//////////////////////////////////////////////////////////////////////
+
 #pragma once
 
 class CPoids

@@ -1,5 +1,7 @@
-// Board.cpp: implementation of the CBoard class.
-//
+//////////////////////////////////////////////////////////////////////
+// B O A R D . C P P
+// 12 Décembre 2012
+// Francis Côté & Daren Ken St- Laurent
 //////////////////////////////////////////////////////////////////////
 #include "Board.h"
 #include "Poids.h"
@@ -11,7 +13,7 @@ using namespace std;
 const int CBoard::MAXCASES = 8;
 
 //////////////////////////////////////////////////////////////////////
-// Construction/Destruction
+// C O N S T R U C T I O N / D E S T R U C T I O N
 //////////////////////////////////////////////////////////////////////
 
 CBoard::CBoard(ostream & sortie, bool veutTrace)
@@ -43,6 +45,9 @@ CBoard::~CBoard()
 {
 }
 
+/////////////////////////////////////////////////////////////
+// P L A C E R  C A V A L I E R
+/////////////////////////////////////////////////////////////
 void CBoard::PlacerCavalier(unsigned int i, unsigned int j)
 {
    ligneDepart_ = i;
@@ -58,8 +63,8 @@ void CBoard::PlacerCavalier(int i, int j)
       grilleVisitee_[i][j] = true;
       grilleTrajet_[i][j]  = noPasDuTrajet_;
       noPasDuTrajet_++;
-      vector <CPoids> PasChevalier;
-      TrouverCase(PasChevalier , i , j);
+      vector <CPoids> PasChevalier; // Déclaration du vecteur de déplacement chevalier
+      TrouverCase(PasChevalier , i , j); // Fonction pour trouver la meilleure case 
       for ( int a = 0 ; a < PasChevalier.size() && continuerRecherche_ ; a++)
       {
          if (faireTrace_ ) 
@@ -86,6 +91,10 @@ void CBoard::PlacerCavalier(int i, int j)
    }
 }
 
+
+/////////////////////////////////////////////////////////////////////
+// M É T H O D E S  D ' A F F I C H A G E
+/////////////////////////////////////////////////////////////////////
 void CBoard::AfficherNoSolution(int noSolution)
 {
    out_ << endl 
@@ -146,6 +155,10 @@ void CBoard::AfficherTrajetTrace()
    Wait(1);
 }
 
+
+///////////////////////////////////////////////////////
+// W A I T 
+///////////////////////////////////////////////////////
 void CBoard::Wait(int nbSec)
 {
    CTime startTime = CTime::GetCurrentTime();
@@ -158,15 +171,24 @@ void CBoard::Wait(int nbSec)
    }
 }
 
+/////////////////////////////////////////////////////
+// T O U T E  E S T  V I S I T E
+/////////////////////////////////////////////////////
 bool CBoard::ToutEstVisite()
 {
    return (noPasDuTrajet_ >= ((MAXCASES * MAXCASES)- 1));
 }
 
+/////////////////////////////////////////////////////
+// S E T  T R A C E
+/////////////////////////////////////////////////////
 void CBoard::SetTrace(bool b)
 {
    faireTrace_ = b;
 }
+////////////////////////////////////////////////////
+// T R O U V E R  C A S E S
+////////////////////////////////////////////////////
 void CBoard::TrouverCase(vector<CPoids> &PasChevalier , int i , int j)
 {
    if( i-1 >= 0 && j-2 >=0)
@@ -218,7 +240,9 @@ void CBoard::TrouverCase(vector<CPoids> &PasChevalier , int i , int j)
    }
    sort(PasChevalier.begin(),PasChevalier.end());
 }
-
+/////////////////////////////////////////////////////////////
+// T R O U V E R  P O I D S
+/////////////////////////////////////////////////////////////
 int CBoard::TrouverPoids(int i,int j)
 {
    int CasesPossibles = 0;
