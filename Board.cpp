@@ -82,7 +82,6 @@ void CBoard::PlacerCavalier(int i, int j)
 				noPasDuTrajet_--;
 
 			}	
->>>>>>> Marche quasiment fait tout ltemps meme move
 		}
 	}
 }
@@ -169,14 +168,15 @@ void CBoard::SetTrace(bool b)
 	faireTrace_ = b;
 }
 
-<<<<<<< HEAD
+/*
 CBoard::Position::Position(unsigned int i,unsigned int j) // Structure pour la position dans Verif boite -> Quadrant
 {
 	PosI = i;
 	PosJ = j;
 
 }
-=======
+*/
+
 int CBoard::DeterminerPoids(int i , int j )
 {
 	
@@ -261,4 +261,3 @@ void CBoard::ChercherCase(vector<CPoids> &PasChevalier , int i , int j)
    sort(PasChevalier.begin(),PasChevalier.end());
 }
 
->>>>>>> Marche quasiment fait tout ltemps meme move
