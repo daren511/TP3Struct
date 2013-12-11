@@ -27,7 +27,7 @@ int main()
 	Timer.StartTimer();
 	oEchiquier.PlacerCavalier(x,y);
 	Timer.StopTimer();
-	cout<< Timer.GetTime() << " milliseconds" << endl;
+	cout<< Timer.GetTime() << " microseconds" << endl;
 	system("pause");
 }
 
