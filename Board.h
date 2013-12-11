@@ -31,14 +31,13 @@ private:
 	int  colonneDepart_;
 	CMatrice<bool> grilleVisitee_;  
 	CMatrice<int>  grilleTrajet_; 
-	CMatrice<CPoids> PoidsMatrice_;
+   CMatrice<CPoids> PoidsGrille_;
 
 private:
 	//--- Méthode lancée par le PlacerCavalier public
 	void PlacerCavalier(int i, int j);
-	int DeterminerPoids(int i , int j);
-	void ChercherCase(vector<CPoids> &PasChevalier , int i , int j );
-
+	void TrouverCase(vector<CPoids> &ListeDeplacement , int i , int j);
+	int TrouverPoids(int i,int j);
 
 	//--- Autres méthodes utiles
 	void AfficherNoSolution(int);
@@ -46,17 +45,4 @@ private:
 	void AfficherTrajetTrace();
 	bool ToutEstVisite();
 	void Wait(int nbSec);
-
-	struct Position
-	{
-		unsigned int PosX;
-		unsigned int PosY;
-		unsigned int Priorite;
-
-		Position(unsigned int X,unsigned int Y);
-
-		unsigned int GetX() { return PosX; }
-		unsigned int GetY() { return PosY; }
-	};
-	void TrouverCase(vector<Position> & ListeDeplacement ,unsigned int i,unsigned int j);
 };
