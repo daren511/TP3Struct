@@ -3,7 +3,6 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 #include "Matrice.h"
-#include <vector>
 #include "Poids.h"
 #include <iostream>
 using namespace std;

@@ -31,6 +31,7 @@ CBoard::CBoard(ostream & sortie, bool veutTrace)
 			PoidsMatrice_[i][j].SetX(i);
 			PoidsMatrice_[i][j].SetX(j);
 			int DetPoids = DeterminerPoids(i,j);
+			PoidsMatrice_[i][j].SetPoids(DetPoids);
 			grilleVisitee_[i][j] = false;
 			grilleTrajet_[i][j] = -1;
 			noPasDuTrajet_ = 0;
@@ -59,7 +60,7 @@ void CBoard::PlacerCavalier(int i, int j)
 		noPasDuTrajet_++;
 		vector <CPoids> PasChevalier;
 		ChercherCase(PasChevalier , i , j);
-		for (int i = 0; i < PasChevalier.size() && continuerRecherche_; i++)
+		for (int t = 0; t < PasChevalier.size() && continuerRecherche_; t++)
 		{
 			if (faireTrace_) 
 				AfficherTrajetTrace();
@@ -67,18 +68,18 @@ void CBoard::PlacerCavalier(int i, int j)
 			if (ToutEstVisite())
 			{
 				// Afficher à l'écran
-				grilleTrajet_[PasChevalier[i].GetX()][PasChevalier[i].GetY()];
+				grilleTrajet_[PasChevalier[t].GetX()][PasChevalier[t].GetY()] = noPasDuTrajet_;
 				continuerRecherche_ = false;
 				system("cls");
 				AfficherTrajet(++nbDeSolutions_);
 			}
 			else
-			PlacerCavalier(PasChevalier[i].GetX(),PasChevalier[i].GetY());
+				PlacerCavalier(PasChevalier[t].GetX(),PasChevalier[t].GetY());
 			
 			if ( continuerRecherche_)
 			{
-				grilleTrajet_[PasChevalier[i].GetX()][PasChevalier[i].GetY()] = -1;
-				grilleVisitee_[PasChevalier[i].GetX()][PasChevalier[i].GetY()] = false;
+				grilleTrajet_[PasChevalier[t].GetX()][PasChevalier[t].GetY()] = -1;
+				grilleVisitee_[PasChevalier[t].GetX()][PasChevalier[t].GetY()] = false;
 				noPasDuTrajet_--;
 
 			}	
@@ -160,7 +161,7 @@ void CBoard::Wait(int nbSec)
 
 bool CBoard::ToutEstVisite()
 {
-	return (noPasDuTrajet_ >= ((MAXCASES * MAXCASES)));
+	return (noPasDuTrajet_ >= ((MAXCASES * MAXCASES)-1));
 }
 
 void CBoard::SetTrace(bool b)
@@ -179,21 +180,13 @@ CBoard::Position::Position(unsigned int i,unsigned int j) // Structure pour la p
 
 int CBoard::DeterminerPoids(int i , int j )
 {
-	
-   int NbPossibilités = 0;
+	int NbPossibilités = 0;
 
-   if( i-2 >= 0 && j-1 >= 0)
-      NbPossibilités++;
-   
    if( i-1 >= 0 && j-2 >=0)
       NbPossibilités++;
 
-   if( i+2 < MAXCASES && j-1 >= 0)
+   if( i-2 >= 0 && j-1 >= 0)
       NbPossibilités++;
-
-   if( i+1 < MAXCASES && j-2 >= 0)
-      NbPossibilités++;
-
 
    if( i-2 >= 0 && j+1 < MAXCASES)
       NbPossibilités++;
@@ -205,6 +198,12 @@ int CBoard::DeterminerPoids(int i , int j )
       NbPossibilités++;
 
    if( i+2 < MAXCASES && j+1 < MAXCASES)
+      NbPossibilités++;
+
+   if( i+2 < MAXCASES && j-1 >= 0)
+      NbPossibilités++;
+
+   if( i+1 < MAXCASES && j-2 >= 0)
       NbPossibilités++;
 
    return NbPossibilités;
