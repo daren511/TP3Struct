@@ -3,7 +3,11 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 #include "Matrice.h"
+<<<<<<< HEAD
 #include <vector>
+=======
+#include "Poids.h"
+>>>>>>> Marche quasiment fait tout ltemps meme move
 #include <iostream>
 using namespace std;
 
@@ -31,11 +35,17 @@ private:
 	int  colonneDepart_;
 	CMatrice<bool> grilleVisitee_;  
 	CMatrice<int>  grilleTrajet_; 
+	CMatrice<CPoids> PoidsMatrice_;
 
 private:
 	//--- Méthode lancée par le PlacerCavalier public
 	void PlacerCavalier(int i, int j);
+<<<<<<< HEAD
 	
+=======
+	int DeterminerPoids(int i , int j);
+	void ChercherCase(vector<CPoids> &PasChevalier , int i , int j );
+>>>>>>> Marche quasiment fait tout ltemps meme move
 
 	//--- Autres méthodes utiles
 	void AfficherNoSolution(int);

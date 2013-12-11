@@ -14,12 +14,14 @@
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Fonctions.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Poids.cpp" />
     <ClCompile Include="PreciseTimer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Board.h" />
     <ClInclude Include="Fonctions.h" />
     <ClInclude Include="Matrice.h" />
+    <ClInclude Include="Poids.h" />
     <ClInclude Include="PreciseTimer.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

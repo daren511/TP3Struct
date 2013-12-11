@@ -8,6 +8,7 @@
 //  par Pierre Prud'homme, novembre 2008
 //--------------------------------------------------------
 #include "board.h"
+#include "PreciseTimer.h"
 #include <iostream>
 using namespace std;
 
@@ -19,11 +20,15 @@ int main()
 {
 	system("Color f0");
 	unsigned int x, y;
+	CPreciseTimer Timer;
 
 	LireCoordonneesDepart(x, y);
 	CBoard oEchiquier (cout, VeutUneTrace());
+	Timer.StartTimer();
 	oEchiquier.PlacerCavalier(x,y);
-
+	Timer.StopTimer();
+	cout<< Timer.GetTime() << " milliseconds" << endl;
+	system("pause");
 }
 
 void LireCoordonneesDepart(unsigned int &x, unsigned int &y)
