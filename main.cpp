@@ -6,6 +6,8 @@
 //
 //  Solution de départ pour les étudiants
 //  par Pierre Prud'homme, novembre 2008
+// 
+// Modifié par Francis Côté & Daren Ken St-Laurent
 //--------------------------------------------------------
 #include "board.h"
 #include "PreciseTimer.h"

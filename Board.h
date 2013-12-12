@@ -23,6 +23,8 @@ public:
 	void SetTrace(bool);
 
 private:
+	// Structure Position qui donne les positions valides ainsi que le poids de
+	// de la matrice de base
 	struct Position
 	{
 		int PosI_;
