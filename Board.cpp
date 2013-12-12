@@ -29,10 +29,10 @@ CBoard::CBoard(ostream & sortie, bool veutTrace)
    for (int i=0; i<MAXCASES; i++)
       for (int j=0; j<MAXCASES; j++)
       {
-         PoidsGrille_[i][j].SetX(i);
-         PoidsGrille_[i][j].SetY(j); 
+		  PoidsGrille_[i][j].PosI_ = i;
+		  PoidsGrille_[i][j].PosJ_ = j; 
          int Poids = TrouverPoids(i,j);
-         PoidsGrille_[i][j].SetPoids(Poids);
+		 PoidsGrille_[i][j].poids_ = Poids;
          grilleVisitee_[i][j] = false;
          grilleTrajet_[i][j] = -1;
          noPasDuTrajet_ = 0;
@@ -44,6 +44,18 @@ CBoard::CBoard(ostream & sortie, bool veutTrace)
 CBoard::~CBoard()
 {
 }
+
+CBoard::Position::Position(int i, int j,int poids)
+{
+	PosI_ = i;
+	PosJ_ = j;
+	poids_ = poids;
+}
+CBoard::Position::operator int()
+{
+   return poids_;
+}
+
 
 /////////////////////////////////////////////////////////////
 // P L A C E R  C A V A L I E R
@@ -63,7 +75,7 @@ void CBoard::PlacerCavalier(int i, int j)
       grilleVisitee_[i][j] = true;
       grilleTrajet_[i][j]  = noPasDuTrajet_;
       noPasDuTrajet_++;
-      vector <CPoids> PasChevalier; // Déclaration du vecteur de déplacement chevalier
+      vector <Position> PasChevalier; // Déclaration du vecteur de déplacement chevalier
       TrouverCase(PasChevalier , i , j); // Fonction pour trouver la meilleure case 
       for ( int a = 0 ; a < PasChevalier.size() && continuerRecherche_ ; a++)
       {
@@ -72,19 +84,19 @@ void CBoard::PlacerCavalier(int i, int j)
 
          if(ToutEstVisite())
          {
-            grilleTrajet_[PasChevalier[a].GetX()][PasChevalier[a].GetY()]  = noPasDuTrajet_;
+			 grilleTrajet_[PasChevalier[a].PosI_][PasChevalier[a].PosJ_]  = noPasDuTrajet_;
             continuerRecherche_ = false;
             system("cls");
             AfficherTrajet(++nbDeSolutions_); 
          }
          else
          {
-            PlacerCavalier(PasChevalier[a].GetX() , PasChevalier[a].GetY());
+            PlacerCavalier(PasChevalier[a].PosI_ , PasChevalier[a].PosJ_);
          }
          if ( continuerRecherche_)
          {
-            grilleTrajet_[PasChevalier[a].GetX()] [PasChevalier[a].GetY()]  = -1;
-            grilleVisitee_[PasChevalier[a].GetX()] [PasChevalier[a].GetY()] = false;
+            grilleTrajet_[PasChevalier[a].PosI_] [PasChevalier[a].PosJ_]  = -1;
+            grilleVisitee_[PasChevalier[a].PosI_] [PasChevalier[a].PosJ_] = false;
             noPasDuTrajet_--;
          }	
       }
@@ -189,7 +201,7 @@ void CBoard::SetTrace(bool b)
 ////////////////////////////////////////////////////
 // T R O U V E R  C A S E S
 ////////////////////////////////////////////////////
-void CBoard::TrouverCase(vector<CPoids> &PasChevalier , int i , int j)
+void CBoard::TrouverCase(vector<Position> &PasChevalier , int i , int j)
 {
    if( i-1 >= 0 && j-2 >=0)
    {

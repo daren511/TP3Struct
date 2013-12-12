@@ -5,7 +5,6 @@
 //////////////////////////////////////////////////////////////////////
 #pragma once
 #include "Matrice.h"
-#include "Poids.h"
 #include <iostream>
 using namespace std;
 
@@ -14,6 +13,7 @@ class CBoard
 public:
 	//--- Constructeur et destructeur
 	CBoard(ostream &, bool veutTrace);
+
 	virtual ~CBoard();
 
 	//--- Méthode de lancement de la recherche de solution
@@ -23,6 +23,17 @@ public:
 	void SetTrace(bool);
 
 private:
+	struct Position
+	{
+		int PosI_;
+		int PosJ_;
+		int poids_;
+
+
+		Position(int i = 0, int j = 0,int poids = 0);
+		operator int();
+
+	};
 	// Nombre de cases de l'échiquier
 	static const int MAXCASES;
 
@@ -52,13 +63,12 @@ private:
 	CMatrice<int>  grilleTrajet_; 
 
 	 // Matrice Poids pour la matrice principale
-    CMatrice<CPoids> PoidsGrille_;
+    CMatrice<Position> PoidsGrille_;
 
-private:
 	//--- Méthode lancée par le PlacerCavalier public
 	void PlacerCavalier(int i, int j);
 	
-	void TrouverCase(vector<CPoids> &ListeDeplacement , int i , int j);
+	void TrouverCase(vector<Position> &ListeDeplacement , int i , int j);
 	
 	// Fonction pour trouver le poids
 	int TrouverPoids(int i,int j);
@@ -73,4 +83,5 @@ private:
 	bool ToutEstVisite();
 	
 	void Wait(int nbSec);
+
 };
